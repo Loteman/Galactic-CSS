@@ -1,1 +1,68 @@
-# galactic css
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galactic CSS</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="stars"></div>
+
+<div class="app">
+
+  <header class="app-header">
+    <h1><span class="rocket-emoji">🚀</span> Galactic CSS</h1>
+    <p class="subtitle">Learn CSS Flexbox by guiding fleets into formation</p>
+  </header>
+
+  <div class="progress-bar" id="progress-bar">
+    <span id="level-indicator" class="level-indicator">Level 1 of 8</span>
+    <div class="level-dots" id="level-dots"></div>
+  </div>
+
+  <main class="game-container">
+
+    <section class="mission-panel">
+      <h2 class="panel-title">📡 Mission Briefing</h2>
+      <p id="instruction-text" class="instruction-text"></p>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+
+    <section class="board-section">
+      <div class="board-scroll">
+        <div id="game-board" class="game-board" role="img" aria-label="Docking bay with rockets to arrange"></div>
+      </div>
+    </section>
+
+    <section class="control-panel" id="control-panel" aria-label="Flexbox property controls">
+      <!-- Controls injected dynamically per level -->
+    </section>
+
+    <section class="actions">
+      <button id="check-btn" class="btn btn-primary">✅ Check Solution</button>
+      <button id="reset-btn" class="btn btn-secondary">↺ Reset Level</button>
+      <button id="hint-btn" class="btn btn-ghost">💡 Hint</button>
+      <div class="nav-buttons">
+        <button id="prev-btn" class="btn btn-nav">◀ Prev</button>
+        <button id="next-btn" class="btn btn-nav">Next ▶</button>
+      </div>
+    </section>
+
+    <section class="stats" id="stats">
+      <span id="score-display">🏆 Score: 0</span>
+      <span id="attempts-display">🎯 Attempts this level: 0</span>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>Built with vanilla HTML, CSS &amp; JavaScript</p>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
