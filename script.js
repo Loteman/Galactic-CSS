@@ -110,6 +110,55 @@ const LEVELS = [
 
 const STORAGE_KEY = 'galacticDockingBay.progress.v1';
 
+
+/* ---------------- State ---------------- */
+
+let state = {
+  currentIndex: 0,
+  completed: {},   // { [levelId]: true }
+  scores: {},      // { [levelId]: number }
+  attempts: {},    // { [levelId]: totalAttemptsEver }
+  stars: {},       // { [levelId]: 1|2|3 }
+  summaryShown: false
+};
+
+function computeStars(attemptsTaken) {
+  if (attemptsTaken <= 1) return 3;
+  if (attemptsTaken <= 3) return 2;
+  return 1;
+}
+
+let currentValues = {}; // live property values for the level being played
+let sessionAttempts = 0; // attempts made on the current level since it was loaded
+let hintLevel = 0; // 0 = no hint shown yet, 1 = soft hint, 2+ = strong (reveal) hint
+
+/* ---------------- Persistence ---------------- */
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.warn('Could not save progress to localStorage.', e);
+  }
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      state = Object.assign(state, parsed);
+    }
+  } catch (e) {
+    console.warn('Could not load saved progress.', e);
+  }
+}
+
+function getUnlockedCount() {
+  const completedCount = Object.keys(state.completed).length;
+  return Math.min(completedCount + 1, LEVELS.length);
+}
+
 /* ---------------- Init ---------------- */
 
 function init() {
