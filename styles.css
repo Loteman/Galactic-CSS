@@ -133,6 +133,122 @@ body {
 .rocket-item:nth-child(6n+0) { background: linear-gradient(160deg, #60a5fa, #2f6fd6); }
 
   
+/* ---------------- Control panel ---------------- */
+
+.control-panel {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  background: var(--bg-panel);
+  border: 1px solid var(--bg-panel-light);
+  border-radius: 14px;
+  padding: 14px 18px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 160px;
+}
+
+.control-group label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.control-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 10px 34px 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--bg-panel-light);
+  background-color: var(--bg-deep);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--accent-cyan) 50%),
+    linear-gradient(135deg, var(--accent-cyan) 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) calc(50% - 3px),
+    calc(100% - 15px) calc(50% - 3px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  color: var(--text-main);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.control-group select:hover {
+  border-color: var(--accent-cyan);
+}
+
+.control-group select:focus {
+  outline: 2px solid var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+
+/* ---------------- Accessible focus states ---------------- */
+
+button:focus-visible,
+select:focus-visible,
+.level-dot:focus-visible {
+  outline: 3px solid var(--accent-gold);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(255, 209, 102, 0.25);
+}
+
+button:focus:not(:focus-visible),
+select:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ---------------- Live CSS code panel ---------------- */
+
+.code-panel {
+  width: 100%;
+  background: #050814;
+  border: 1px solid var(--bg-panel-light);
+  border-radius: 14px;
+  padding: 14px 18px;
+}
+
+.code-panel-title {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+.code-block {
+  margin: 0;
+  overflow-x: auto;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+.css-selector {
+  color: var(--accent-purple);
+}
+
+.css-prop {
+  color: var(--accent-cyan);
+}
+
+.css-value {
+  color: var(--accent-gold);
+}
+
+.css-punct {
+  color: var(--text-dim);
+}
+  
 /* ---------------- Header ---------------- */
 
 .app-header {
