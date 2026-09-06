@@ -24,7 +24,6 @@ const PROPERTY_META = {
   }
 };
 
-
 const LEVELS = [
   {
     id: 1,
@@ -110,6 +109,93 @@ const LEVELS = [
 
 const STORAGE_KEY = 'galacticDockingBay.progress.v1';
 
+
+
+/* ---------------- Navigation ---------------- */
+
+function goNext() {
+  const nextIndex = state.currentIndex + 1;
+  if (nextIndex < LEVELS.length && nextIndex < getUnlockedCount()) {
+    loadLevel(nextIndex);
+  }
+}
+
+function goPrev() {
+  const prevIndex = state.currentIndex - 1;
+  if (prevIndex >= 0) {
+    loadLevel(prevIndex);
+  }
+}
+
+function resetAllProgress() {
+  const confirmed = window.confirm(
+    'This will permanently erase ALL saved progress, scores, and stars for every level. Continue?'
+  );
+  if (!confirmed) return;
+
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (e) {
+    console.warn('Could not clear saved progress.', e);
+  }
+
+  state = { currentIndex: 0, completed: {}, scores: {}, attempts: {}, stars: {}, summaryShown: false };
+  loadLevel(0);
+}
+
+/* ---------------- Mission summary overlay ---------------- */
+
+const CONFETTI_EMOJI = ['⭐', '🚀', '✨', '🪐'];
+
+function spawnConfetti() {
+  els.confettiLayer.innerHTML = '';
+  const pieceCount = 28;
+
+  for (let i = 0; i < pieceCount; i++) {
+    const piece = document.createElement('span');
+    piece.className = 'confetti-piece';
+    piece.textContent = CONFETTI_EMOJI[Math.floor(Math.random() * CONFETTI_EMOJI.length)];
+    piece.style.left = Math.random() * 100 + '%';
+    piece.style.animationDuration = (3 + Math.random() * 3) + 's';
+    piece.style.animationDelay = (Math.random() * 3) + 's';
+    piece.style.fontSize = (14 + Math.random() * 14) + 'px';
+    els.confettiLayer.appendChild(piece);
+  }
+}
+
+function showSummaryOverlay() {
+  const totalScore = Object.values(state.scores).reduce((sum, s) => sum + s, 0);
+  const totalStars = Object.values(state.stars).reduce((sum, s) => sum + s, 0);
+  const maxStars = LEVELS.length * 3;
+
+  els.summaryTagline.textContent = 'Every docking bay in the sector has been mastered.';
+  els.summaryScore.textContent = String(totalScore);
+  els.summaryStars.textContent = totalStars + ' / ' + maxStars;
+
+  els.summaryTbody.innerHTML = '';
+  LEVELS.forEach((level) => {
+    const row = document.createElement('tr');
+    const attempts = state.attempts[level.id] || 0;
+    const score = state.scores[level.id] || 0;
+    const stars = state.stars[level.id] || 0;
+
+    row.innerHTML =
+      '<td>' + level.title + '</td>' +
+      '<td>' + attempts + '</td>' +
+      '<td>' + score + '</td>' +
+      '<td class="table-stars">' + '★'.repeat(stars) + '☆'.repeat(3 - stars) + '</td>';
+
+    els.summaryTbody.appendChild(row);
+  });
+
+  spawnConfetti();
+  els.summaryOverlay.hidden = false;
+}
+
+function hideSummaryOverlay() {
+  els.summaryOverlay.hidden = true;
+  els.confettiLayer.innerHTML = '';
+}
 
 /* ---------------- State ---------------- */
 
