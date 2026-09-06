@@ -109,3 +109,23 @@ const LEVELS = [
 ];
 
 const STORAGE_KEY = 'galacticDockingBay.progress.v1';
+
+/* ---------------- Init ---------------- */
+
+function init() {
+  loadState();
+
+  const startIndex = Math.min(state.currentIndex || 0, getUnlockedCount() - 1);
+
+  els.checkBtn.addEventListener('click', checkSolution);
+  els.resetBtn.addEventListener('click', resetCurrentLevel);
+  els.hintBtn.addEventListener('click', showHint);
+  els.prevBtn.addEventListener('click', goPrev);
+  els.nextBtn.addEventListener('click', goNext);
+  els.resetAllBtn.addEventListener('click', resetAllProgress);
+  els.summaryCloseBtn.addEventListener('click', hideSummaryOverlay);
+
+  loadLevel(startIndex);
+}
+
+document.addEventListener('DOMContentLoaded', init);
