@@ -159,6 +159,47 @@ function getUnlockedCount() {
   return Math.min(completedCount + 1, LEVELS.length);
 }
 
+
+/* ---------------- Level lifecycle ---------------- */
+
+function loadLevel(index) {
+  state.currentIndex = index;
+  const level = LEVELS[index];
+
+  currentValues = Object.assign({}, level.base);
+  sessionAttempts = 0;
+  hintLevel = 0;
+
+  els.levelIndicator.textContent = 'Level ' + (index + 1) + ' of ' + LEVELS.length + ' — ' + level.title;
+  els.instructionText.textContent = level.instruction;
+  clearFeedback();
+
+  renderBoard(level);
+  renderControls(level);
+  renderStats(level);
+  renderLevelDots();
+  renderNavButtons();
+
+  saveState();
+}
+
+function goToLevel(index) {
+  if (index < 0 || index >= LEVELS.length) return;
+  if (index >= getUnlockedCount()) return;
+  loadLevel(index);
+}
+
+function resetCurrentLevel() {
+  const level = LEVELS[state.currentIndex];
+  currentValues = Object.assign({}, level.base);
+  hintLevel = 0;
+  applyBoardStyles();
+  renderControls(level);
+  clearFeedback();
+  els.board.classList.remove('flash-success', 'flash-error');
+}
+
+
 /* ---------------- Init ---------------- */
 
 function init() {
