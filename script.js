@@ -246,6 +246,176 @@ function getUnlockedCount() {
 }
 
 
+/* ---------------- DOM references ---------------- */
+
+const els = {
+  levelIndicator: document.getElementById('level-indicator'),
+  levelDots: document.getElementById('level-dots'),
+  progressTrack: document.getElementById('progress-track'),
+  progressFill: document.getElementById('progress-fill'),
+  instructionText: document.getElementById('instruction-text'),
+  feedback: document.getElementById('feedback'),
+  board: document.getElementById('game-board'),
+  controlPanel: document.getElementById('control-panel'),
+  liveCss: document.getElementById('live-css'),
+  checkBtn: document.getElementById('check-btn'),
+  resetBtn: document.getElementById('reset-btn'),
+  hintBtn: document.getElementById('hint-btn'),
+  prevBtn: document.getElementById('prev-btn'),
+  nextBtn: document.getElementById('next-btn'),
+  scoreDisplay: document.getElementById('score-display'),
+  attemptsDisplay: document.getElementById('attempts-display'),
+  resetAllBtn: document.getElementById('reset-all-btn'),
+  summaryOverlay: document.getElementById('summary-overlay'),
+  summaryTagline: document.getElementById('summary-tagline'),
+  summaryScore: document.getElementById('summary-score'),
+  summaryStars: document.getElementById('summary-stars'),
+  summaryTbody: document.getElementById('summary-tbody'),
+  summaryCloseBtn: document.getElementById('summary-close-btn'),
+  confettiLayer: document.getElementById('confetti-layer')
+};
+
+/* ---------------- Rendering ---------------- */
+
+function renderProgressBar() {
+  const completedCount = Object.keys(state.completed).length;
+  const percent = Math.round((completedCount / LEVELS.length) * 100);
+  els.progressFill.style.width = percent + '%';
+  els.progressTrack.setAttribute('aria-valuenow', String(percent));
+}
+
+function renderLevelDots() {
+  els.levelDots.innerHTML = '';
+  renderProgressBar();
+  const unlockedCount = getUnlockedCount();
+
+  LEVELS.forEach((level, idx) => {
+    const dot = document.createElement('button');
+    dot.className = 'level-dot';
+    dot.type = 'button';
+
+    const isUnlocked = idx < unlockedCount;
+    const isCompleted = !!state.completed[level.id];
+    const isCurrent = idx === state.currentIndex;
+    const stars = state.stars[level.id] || 0;
+
+    dot.innerHTML = '<span class="dot-number">' + (idx + 1) + '</span>' +
+      (isCompleted ? '<span class="dot-stars">' + '★'.repeat(stars) + '</span>' : '');
+
+    dot.setAttribute('aria-label', 'Level ' + (idx + 1) + ': ' + level.title +
+      (isCompleted ? ', ' + stars + ' out of 3 stars' : ''));
+
+    if (isCompleted) dot.classList.add('completed');
+    if (isCurrent) dot.classList.add('current');
+    if (isUnlocked) {
+      dot.classList.add('unlocked');
+      dot.addEventListener('click', () => goToLevel(idx));
+    } else {
+      dot.disabled = true;
+    }
+
+    els.levelDots.appendChild(dot);
+  });
+}
+
+function renderBoard(level) {
+  els.board.innerHTML = '';
+  applyBoardStyles();
+
+  for (let i = 1; i <= level.itemCount; i++) {
+    const item = document.createElement('div');
+    item.className = 'rocket-item';
+    item.innerHTML = '🚀<span class="rocket-label">R' + i + '</span>';
+    els.board.appendChild(item);
+  }
+}
+
+function applyBoardStyles() {
+  els.board.style.flexDirection = currentValues.flexDirection;
+  els.board.style.justifyContent = currentValues.justifyContent;
+  els.board.style.alignItems = currentValues.alignItems;
+  els.board.style.flexWrap = currentValues.flexWrap;
+  renderLiveCss();
+}
+
+function renderLiveCss() {
+  const lines = [
+    ['display', 'flex'],
+    ['flex-direction', currentValues.flexDirection],
+    ['justify-content', currentValues.justifyContent],
+    ['align-items', currentValues.alignItems],
+    ['flex-wrap', currentValues.flexWrap]
+  ];
+
+  let html = '<span class="css-selector">.docking-bay</span> <span class="css-punct">{</span>\n';
+  lines.forEach(([prop, value]) => {
+    html += '  <span class="css-prop">' + prop + '</span><span class="css-punct">:</span> ' +
+      '<span class="css-value">' + value + '</span><span class="css-punct">;</span>\n';
+  });
+  html += '<span class="css-punct">}</span>';
+
+  els.liveCss.innerHTML = html;
+}
+
+function renderControls(level) {
+  els.controlPanel.innerHTML = '';
+
+  level.controls.forEach((propKey) => {
+    const meta = PROPERTY_META[propKey];
+
+    const group = document.createElement('div');
+    group.className = 'control-group';
+
+    const label = document.createElement('label');
+    const selectId = 'control-' + propKey;
+    label.setAttribute('for', selectId);
+    label.textContent = meta.label;
+
+    const select = document.createElement('select');
+    select.id = selectId;
+    select.dataset.prop = propKey;
+
+    meta.options.forEach((optionValue) => {
+      const opt = document.createElement('option');
+      opt.value = optionValue;
+      opt.textContent = optionValue;
+      select.appendChild(opt);
+    });
+
+    select.value = currentValues[propKey];
+
+    select.addEventListener('change', (e) => {
+      currentValues[propKey] = e.target.value;
+      applyBoardStyles();
+    });
+
+    group.appendChild(label);
+    group.appendChild(select);
+    els.controlPanel.appendChild(group);
+  });
+}
+
+function renderStats(level) {
+  const totalScore = Object.values(state.scores).reduce((sum, s) => sum + s, 0);
+  els.scoreDisplay.textContent = '🏆 Score: ' + totalScore;
+  els.attemptsDisplay.textContent = '🎯 Attempts this level: ' + sessionAttempts;
+}
+
+function renderNavButtons() {
+  els.prevBtn.disabled = state.currentIndex === 0;
+  els.nextBtn.disabled = state.currentIndex >= getUnlockedCount() - 1;
+}
+
+function clearFeedback() {
+  els.feedback.textContent = '';
+  els.feedback.className = 'feedback';
+}
+
+function showFeedback(message, type) {
+  els.feedback.textContent = message;
+  els.feedback.className = 'feedback ' + type;
+}
+
 /* ---------------- Level lifecycle ---------------- */
 
 function loadLevel(index) {
