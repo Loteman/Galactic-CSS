@@ -49,4 +49,32 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 20px;
+
+  
+/* ---------------- Header ---------------- */
+
+.app-header {
+  text-align: center;
+}
+
+.app-header h1 {
+  margin: 0 0 6px;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 0.5px;
+}
+
+.rocket-emoji {
+  display: inline-block;
+  animation: float 3s ease-in-out infinite;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
 }
