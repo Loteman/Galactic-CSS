@@ -50,6 +50,88 @@ body {
   align-items: center;
   gap: 20px;
 
+
+
+/* ---------------- Board ---------------- */
+
+.board-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.board-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  border-radius: 16px;
+  padding: 4px;
+}
+
+.game-board {
+  /* FIXED pixel dimensions — must stay constant on every device */
+  width: var(--board-w);
+  height: var(--board-h);
+  min-width: var(--board-w);
+  min-height: var(--board-h);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 12px;
+  padding: 16px;
+
+  background:
+    linear-gradient(160deg, rgba(79,216,232,0.06), rgba(167,139,250,0.06)),
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.03) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.03) 40px),
+    var(--bg-panel);
+  border: 2px solid var(--border-glow);
+  border-radius: 16px;
+  box-shadow: 0 0 24px rgba(79, 216, 232, 0.15) inset, 0 0 18px rgba(79, 216, 232, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.game-board.flash-success {
+  animation: flash-success 0.7s ease;
+}
+
+.game-board.flash-error {
+  animation: flash-error 0.4s ease;
+}
+
+.rocket-item {
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: #fff;
+  font-weight: 700;
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+  transition: order 0.4s ease, transform 0.25s ease;
+  user-select: none;
+}
+
+.rocket-item .rocket-label {
+  font-size: 10px;
+  margin-top: 2px;
+  opacity: 0.85;
+}
+
+.rocket-item:nth-child(6n+1) { background: linear-gradient(160deg, #4fd8e8, #2b8fb8); }
+.rocket-item:nth-child(6n+2) { background: linear-gradient(160deg, #a78bfa, #6d4fd6); }
+.rocket-item:nth-child(6n+3) { background: linear-gradient(160deg, #ffd166, #e0942f); }
+.rocket-item:nth-child(6n+4) { background: linear-gradient(160deg, #ff8fab, #e0537c); }
+.rocket-item:nth-child(6n+5) { background: linear-gradient(160deg, #4ade80, #24a35a); }
+.rocket-item:nth-child(6n+0) { background: linear-gradient(160deg, #60a5fa, #2f6fd6); }
+
   
 /* ---------------- Header ---------------- */
 
