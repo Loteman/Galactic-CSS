@@ -78,3 +78,95 @@ body {
   font-size: 0.95rem;
 }
 }
+
+
+/* ---------------- Progress ---------------- */
+
+.progress-bar {
+  width: 100%;
+  max-width: var(--board-w);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.level-indicator {
+  font-weight: 600;
+  color: var(--accent-gold);
+  letter-spacing: 0.5px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-panel-light);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+
+.level-dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding-bottom: 14px;
+}
+
+.level-dot {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-panel-light);
+  background: var(--bg-panel);
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: not-allowed;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.dot-stars {
+  position: absolute;
+  bottom: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8px;
+  line-height: 1;
+  color: var(--accent-gold);
+  white-space: nowrap;
+}
+
+.level-dot.unlocked {
+  cursor: pointer;
+  border-color: var(--accent-cyan);
+}
+
+.level-dot.unlocked:hover {
+  transform: scale(1.12);
+}
+
+.level-dot.current {
+  border-color: var(--accent-gold);
+  background: var(--bg-panel-light);
+  color: var(--accent-gold);
+  box-shadow: 0 0 10px var(--accent-gold);
+}
+
+.level-dot.completed {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+  color: #06210f;
+}
