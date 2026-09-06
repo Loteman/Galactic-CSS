@@ -170,3 +170,74 @@ body {
   border-color: var(--accent-green);
   color: #06210f;
 }
+
+
+/* ---------------- Layout shell ---------------- */
+
+.game-container {
+  width: 100%;
+  max-width: var(--board-w);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+/* ---------------- Mission panel ---------------- */
+
+.mission-panel {
+  width: 100%;
+  background: var(--bg-panel);
+  border: 1px solid var(--bg-panel-light);
+  border-radius: 14px;
+  padding: 16px 20px;
+}
+
+.panel-title {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: var(--accent-cyan);
+}
+
+.instruction-text {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.feedback {
+  margin-top: 10px;
+  min-height: 0;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.feedback:empty {
+  margin-top: 0;
+  padding: 0;
+}
+
+.feedback.success {
+  padding: 10px 14px;
+  background: rgba(74, 222, 128, 0.15);
+  border: 1px solid var(--accent-green);
+  color: var(--accent-green);
+  animation: pop 0.4s ease;
+}
+
+.feedback.error {
+  padding: 10px 14px;
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid var(--accent-red);
+  color: var(--accent-red);
+  animation: shake 0.35s ease;
+}
+
+.feedback.hint {
+  padding: 10px 14px;
+  background: rgba(255, 209, 102, 0.12);
+  border: 1px dashed var(--accent-gold);
+  color: var(--accent-gold);
+}
