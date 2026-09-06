@@ -1,0 +1,52 @@
+
+:root {
+  --bg-deep: #070b1e;
+  --bg-panel: #10163a;
+  --bg-panel-light: #171f4d;
+  --accent-cyan: #4fd8e8;
+  --accent-purple: #a78bfa;
+  --accent-gold: #ffd166;
+  --accent-green: #4ade80;
+  --accent-red: #f87171;
+  --text-main: #e8ecff;
+  --text-dim: #9aa4d0;
+  --border-glow: rgba(79, 216, 232, 0.45);
+  --board-w: 600px;
+  --board-h: 400px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(1.6px 1.6px at 15% 25%, rgba(255,255,255,.9), transparent 50%),
+    radial-gradient(1.4px 1.4px at 70% 60%, rgba(255,255,255,.7), transparent 50%),
+    radial-gradient(1px 1px at 40% 85%, rgba(255,255,255,.55), transparent 50%),
+    radial-gradient(1.3px 1.3px at 90% 20%, rgba(255,255,255,.8), transparent 50%),
+    radial-gradient(1px 1px at 55% 45%, rgba(255,255,255,.6), transparent 50%),
+    radial-gradient(1.2px 1.2px at 10% 70%, rgba(255,255,255,.5), transparent 50%);
+  background-repeat: repeat;
+  background-size: 260px 260px;
+  color: var(--text-main);
+  font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
