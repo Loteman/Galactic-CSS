@@ -439,3 +439,44 @@ select:focus:not(:focus-visible) {
   border: 1px dashed var(--accent-gold);
   color: var(--accent-gold);
 }
+
+
+/* ---------------- Board ---------------- */
+
+.board-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.board-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  border-radius: 16px;
+  padding: 4px;
+}
+
+.game-board {
+  /* FIXED pixel dimensions — must stay constant on every device */
+  width: var(--board-w);
+  height: var(--board-h);
+  min-width: var(--board-w);
+  min-height: var(--board-h);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 12px;
+  padding: 16px;
+
+  background:
+    linear-gradient(160deg, rgba(79,216,232,0.06), rgba(167,139,250,0.06)),
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.03) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.03) 40px),
+    var(--bg-panel);
+  border: 2px solid var(--border-glow);
+  border-radius: 16px;
+  box-shadow: 0 0 24px rgba(79, 216, 232, 0.15) inset, 0 0 18px rgba(79, 216, 232, 0.1);
+  transition: box-shadow 0.3s ease;
+}
