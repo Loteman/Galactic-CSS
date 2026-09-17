@@ -595,3 +595,59 @@ select:focus:not(:focus-visible) {
   outline: 2px solid var(--accent-cyan);
   border-color: var(--accent-cyan);
 }
+
+/* ---------------- Accessible focus states ---------------- */
+
+button:focus-visible,
+select:focus-visible,
+.level-dot:focus-visible {
+  outline: 3px solid var(--accent-gold);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(255, 209, 102, 0.25);
+}
+
+button:focus:not(:focus-visible),
+select:focus:not(:focus-visible) {
+  outline: none;
+}
+
+
+.code-panel {
+  width: 100%;
+  background: #050814;
+  border: 1px solid var(--bg-panel-light);
+  border-radius: 14px;
+  padding: 14px 18px;
+}
+
+.code-panel-title {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+.code-block {
+  margin: 0;
+  overflow-x: auto;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+.css-selector {
+  color: var(--accent-purple);
+}
+
+.css-prop {
+  color: var(--accent-cyan);
+}
+
+.css-value {
+  color: var(--accent-gold);
+}
+
+.css-punct {
+  color: var(--text-dim);
+}
