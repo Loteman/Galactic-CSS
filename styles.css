@@ -275,7 +275,7 @@ select:focus:not(:focus-visible) {
   color: var(--text-dim);
   font-size: 0.95rem;
 }
-}
+
 
 
 /* ---------------- Progress ---------------- */
