@@ -1,4 +1,5 @@
 
+'use strict';
 /* ---------------- Level configuration ---------------- */
 
 const PROPERTY_META = {
