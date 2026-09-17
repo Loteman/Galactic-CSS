@@ -521,3 +521,77 @@ select:focus:not(:focus-visible) {
 .rocket-item:nth-child(6n+5) { background: linear-gradient(160deg, #4ade80, #24a35a); }
 .rocket-item:nth-child(6n+0) { background: linear-gradient(160deg, #60a5fa, #2f6fd6); }
 
+
+/* ---------------- Control panel ---------------- */
+
+.control-panel {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  background: var(--bg-panel);
+  border: 1px solid var(--bg-panel-light);
+  border-radius: 14px;
+  padding: 14px 18px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 160px;
+}
+
+.control-group label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg-panel-light);
+  color: var(--accent-cyan);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: help;
+  font-style: normal;
+}
+
+.control-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 10px 34px 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--bg-panel-light);
+  background-color: var(--bg-deep);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--accent-cyan) 50%),
+    linear-gradient(135deg, var(--accent-cyan) 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) calc(50% - 3px),
+    calc(100% - 15px) calc(50% - 3px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  color: var(--text-main);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.control-group select:hover {
+  border-color: var(--accent-cyan);
+}
+
+.control-group select:focus {
+  outline: 2px solid var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
