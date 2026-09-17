@@ -456,27 +456,6 @@ function resetCurrentLevel() {
   els.board.classList.remove('flash-success', 'flash-error');
 }
 
-
-/* ---------------- Init ---------------- */
-
-function init() {
-  loadState();
-
-  const startIndex = Math.min(state.currentIndex || 0, getUnlockedCount() - 1);
-
-  els.checkBtn.addEventListener('click', checkSolution);
-  els.resetBtn.addEventListener('click', resetCurrentLevel);
-  els.hintBtn.addEventListener('click', showHint);
-  els.prevBtn.addEventListener('click', goPrev);
-  els.nextBtn.addEventListener('click', goNext);
-  els.resetAllBtn.addEventListener('click', resetAllProgress);
-  els.summaryCloseBtn.addEventListener('click', hideSummaryOverlay);
-
-  loadLevel(startIndex);
-}
-
-document.addEventListener('DOMContentLoaded', init);
-
 function checkSolution() {
   const level = LEVELS[state.currentIndex];
   let isCorrect = true;
@@ -537,3 +516,23 @@ function showHint() {
     showFeedback('תשובה: הגדירו ' + targets, 'hint');
   }
 }
+/* ---------------- Init ---------------- */
+
+function init() {
+  loadState();
+
+  const startIndex = Math.min(state.currentIndex || 0, getUnlockedCount() - 1);
+
+  els.checkBtn.addEventListener('click', checkSolution);
+  els.resetBtn.addEventListener('click', resetCurrentLevel);
+  els.hintBtn.addEventListener('click', showHint);
+  els.prevBtn.addEventListener('click', goPrev);
+  els.nextBtn.addEventListener('click', goNext);
+  els.resetAllBtn.addEventListener('click', resetAllProgress);
+  els.summaryCloseBtn.addEventListener('click', hideSummaryOverlay);
+
+  loadLevel(startIndex);
+}
+
+document.addEventListener('DOMContentLoaded', init);
+
