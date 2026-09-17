@@ -884,3 +884,79 @@ select:focus:not(:focus-visible) {
   width: 100%;
 }
 
+
+/* ---------------- Animations ---------------- */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes pop {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+@keyframes flash-success {
+  0% { box-shadow: 0 0 0 rgba(74, 222, 128, 0); }
+  40% { box-shadow: 0 0 40px rgba(74, 222, 128, 0.7) inset, 0 0 30px rgba(74, 222, 128, 0.6); }
+  100% { box-shadow: 0 0 24px rgba(79, 216, 232, 0.15) inset, 0 0 18px rgba(79, 216, 232, 0.1); }
+}
+
+@keyframes flash-error {
+  0% { box-shadow: 0 0 0 rgba(248, 113, 113, 0); }
+  40% { box-shadow: 0 0 30px rgba(248, 113, 113, 0.6) inset; }
+  100% { box-shadow: 0 0 24px rgba(79, 216, 232, 0.15) inset, 0 0 18px rgba(79, 216, 232, 0.1); }
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  8% { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0.9; }
+}
+
+/* ---------------- Responsive shell ----------------
+   Only the SURROUNDING layout adapts; the game board
+   itself always keeps its fixed pixel width/height
+   (scrolls horizontally inside .board-scroll if needed). */
+
+@media (max-width: 680px) {
+  .app {
+    padding: 16px 10px 36px;
+  }
+
+  .control-group {
+    min-width: 130px;
+    flex: 1 1 130px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions .btn,
+  .nav-buttons {
+    width: 100%;
+  }
+
+  .nav-buttons {
+    display: flex;
+  }
+
+  .nav-buttons .btn-nav {
+    flex: 1;
+  }
+}
+
+@media (min-width: 900px) {
+  .game-container {
+    max-width: var(--board-w);
+  }
+}
