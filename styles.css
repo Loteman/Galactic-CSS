@@ -726,3 +726,161 @@ select:focus:not(:focus-visible) {
   display: flex;
   gap: 10px;
 }
+
+
+/* ---------------- Stats ---------------- */
+
+.stats {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  padding: 0 4px;
+}
+
+#score-display {
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+/* ---------------- Footer ---------------- */
+
+.app-footer {
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  text-align: center;
+  opacity: 0.7;
+}
+
+/* ---------------- Mission summary overlay ---------------- */
+
+.summary-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(3, 5, 16, 0.82);
+  z-index: 100;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.summary-overlay[hidden] {
+  display: none;
+}
+
+.confetti-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -10%;
+  font-size: 20px;
+  animation-name: confetti-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.summary-modal {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-glow);
+  border-radius: 18px;
+  padding: 28px 26px;
+  text-align: center;
+  box-shadow: 0 0 50px rgba(79, 216, 232, 0.25);
+  animation: pop 0.4s ease;
+}
+
+.summary-modal h2 {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.summary-tagline {
+  margin: 0 0 18px;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.summary-stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 18px;
+}
+
+.summary-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summary-stat-label {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.summary-stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+.summary-table-wrap {
+  max-height: 220px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  border: 1px solid var(--bg-panel-light);
+  border-radius: 10px;
+}
+
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.summary-table th,
+.summary-table td {
+  padding: 8px 10px;
+  text-align: center;
+  border-bottom: 1px solid var(--bg-panel-light);
+}
+
+.summary-table th {
+  color: var(--accent-cyan);
+  position: sticky;
+  top: 0;
+  background: var(--bg-panel);
+}
+
+.summary-table td:first-child {
+  text-align: left;
+}
+
+.summary-table .table-stars {
+  color: var(--accent-gold);
+  white-space: nowrap;
+}
+
+.summary-actions .btn {
+  width: 100%;
+}
