@@ -472,7 +472,7 @@ function checkSolution() {
   renderStats(level);
 
   if (isCorrect) {
-    showFeedback('מעולה! המשימה הושלמה בהצלחה.', 'success');
+    showFeedback('Success, mission accomplished!', 'success');
     els.board.classList.add('flash-success');
     setTimeout(() => els.board.classList.remove('flash-success'), 700);
 
@@ -496,7 +496,7 @@ function checkSolution() {
       saveState();
     }
   } else {
-    showFeedback('המערך לא מדויק. נסו לשנות את הערכים שוב.', 'error');
+    showFeedback('error, try to change the values again.', 'error');
     els.board.classList.add('flash-error');
     setTimeout(() => els.board.classList.remove('flash-error'), 400);
   }
@@ -507,13 +507,13 @@ function showHint() {
   hintLevel++;
   
   if (hintLevel === 1) {
-    showFeedback('רמז: ' + level.hint, 'hint');
+    showFeedback('hint: ' + level.hint, 'hint');
   } else {
     // חשיפת התשובה המלאה בפעם השנייה שלוחצים על הרמז
     const targets = Object.keys(level.target).map(prop => {
       return PROPERTY_META[prop].cssProp + ': ' + level.target[prop];
     }).join(', ');
-    showFeedback('תשובה: הגדירו ' + targets, 'hint');
+    showFeedback('define in answer' + targets, 'hint');
   }
 }
 /* ---------------- Init ---------------- */
