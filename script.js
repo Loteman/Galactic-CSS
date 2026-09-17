@@ -476,3 +476,64 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+function checkSolution() {
+  const level = LEVELS[state.currentIndex];
+  let isCorrect = true;
+
+  // עריכת השוואה בין המצב הנוכחי למטרת השלב
+  for (const prop in level.target) {
+    if (currentValues[prop] !== level.target[prop]) {
+      isCorrect = false;
+      break;
+    }
+  }
+
+  sessionAttempts++;
+  renderStats(level);
+
+  if (isCorrect) {
+    showFeedback('מעולה! המשימה הושלמה בהצלחה.', 'success');
+    els.board.classList.add('flash-success');
+    setTimeout(() => els.board.classList.remove('flash-success'), 700);
+
+    // שמירת ההתקדמות והניקוד
+    state.completed[level.id] = true;
+    state.attempts[level.id] = (state.attempts[level.id] || 0) + sessionAttempts;
+    state.stars[level.id] = Math.max(state.stars[level.id] || 0, computeStars(sessionAttempts));
+    
+    const baseScore = 100;
+    const penalty = (sessionAttempts - 1) * 15;
+    state.scores[level.id] = Math.max(10, baseScore - penalty);
+
+    saveState();
+    renderLevelDots();
+    renderNavButtons();
+
+    // בדיקה אם כל השלבים הושלמו
+    if (Object.keys(state.completed).length === LEVELS.length && !state.summaryShown) {
+      setTimeout(showSummaryOverlay, 1000);
+      state.summaryShown = true;
+      saveState();
+    }
+  } else {
+    showFeedback('המערך לא מדויק. נסו לשנות את הערכים שוב.', 'error');
+    els.board.classList.add('flash-error');
+    setTimeout(() => els.board.classList.remove('flash-error'), 400);
+  }
+}
+
+function showHint() {
+  const level = LEVELS[state.currentIndex];
+  hintLevel++;
+  
+  if (hintLevel === 1) {
+    showFeedback('רמז: ' + level.hint, 'hint');
+  } else {
+    // חשיפת התשובה המלאה בפעם השנייה שלוחצים על הרמז
+    const targets = Object.keys(level.target).map(prop => {
+      return PROPERTY_META[prop].cssProp + ': ' + level.target[prop];
+    }).join(', ');
+    showFeedback('תשובה: הגדירו ' + targets, 'hint');
+  }
+}
