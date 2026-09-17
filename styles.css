@@ -727,8 +727,6 @@ select:focus:not(:focus-visible) {
   gap: 10px;
 }
 
-/* ---------------- Stats ---------------- */
-
 .stats {
   width: 100%;
   display: flex;
@@ -884,7 +882,6 @@ select:focus:not(:focus-visible) {
   width: 100%;
 }
 
-
 /* ---------------- Animations ---------------- */
 
 @keyframes float {
@@ -921,10 +918,6 @@ select:focus:not(:focus-visible) {
   100% { transform: translateY(110vh) rotate(360deg); opacity: 0.9; }
 }
 
-/* ---------------- Responsive shell ----------------
-   Only the SURROUNDING layout adapts; the game board
-   itself always keeps its fixed pixel width/height
-   (scrolls horizontally inside .board-scroll if needed). */
 
 @media (max-width: 680px) {
   .app {
